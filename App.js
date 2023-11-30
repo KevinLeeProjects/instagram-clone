@@ -44,7 +44,9 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import Landing from './components/auth/Landing';
 import Register from './components/auth/Register';
+import Login from './components/auth/Login';
 import Main from './components/Main';
+import AddScreen from './components/main/Add';
 
 
 const Stack = createStackNavigator();
@@ -90,15 +92,20 @@ export class App extends Component {
           <Stack.Navigator initialRouteName="Landing">
             <Stack.Screen name="Landing" component={Landing} options={{ headerShown: false }}/>
             <Stack.Screen name="Register" component={Register}/>
-  
+            <Stack.Screen name="Login" component={Login} />
           </Stack.Navigator>
         </NavigationContainer>
       )
     }
     return (
       <Provider store={store} >
-        
-        <Main />
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="Main">
+              <Stack.Screen name="Main" component={Main} options={{ headerShown: false }}/>
+              <Stack.Screen name="Add" component={AddScreen} />
+
+          </Stack.Navigator>
+        </NavigationContainer>
       </Provider>
         
     )
