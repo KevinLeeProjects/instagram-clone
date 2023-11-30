@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Button, StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 
-export default function App() {
+export default function Add({navigation}) {
   const [type, setType] = useState(CameraType.back);
   const [permission, requestPermission] = Camera.useCameraPermissions();
   const [galleryPermission, requestGalleryPermission] = ImagePicker.useMediaLibraryPermissions();
@@ -14,7 +14,7 @@ export default function App() {
     (async () => {
         const galleryStatus = await ImagePicker.requestMediaLibraryPermissionsAsync();
         requestGalleryPermission(galleryStatus.status === 'granted');
-        if(galleyStatus.status !== 'granted')
+        if(galleryStatus.status !== 'granted')
         {
             alert("Sorry, we need camera roll permission to make this work!");
         }
@@ -85,7 +85,7 @@ export default function App() {
         </Button>
         <Button title="Take Picture" onPress={() => takePicture()} style={{flex: 1}}/>
         <Button title="Pick Image From Gallery" onPress={() => pickImage()} style={{flex: 1}}/>
-
+        <Button title="Save" onPress={() => navigation.navigate('Save', {image})}/>
         {image && <Image source={{uri: image}} style={{flex: 1}}/>}
     </View>
   );
