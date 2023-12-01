@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { View, Button, TextInput } from 'react-native';
-
+import { Text, View, Pressable, TextInput } from 'react-native';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 export class Login extends Component {
@@ -27,21 +26,43 @@ export class Login extends Component {
 
     render() {
         return (
-            <View>
+            <View className="w-[90vw]">
                 <TextInput 
-                    placeholder="email"
+                    className="
+                        border
+                        p-2
+                        mb-[10px]
+                        rounded-lg
+                        text-lg
+                    "
+                    placeholder="Email"
                     onChangeText={(email) => this.setState({ email })}
                 />
                 <TextInput 
-                    placeholder="password"
+                    className="
+                        border
+                        p-2
+                        text-lg
+                        rounded-lg
+                    "
+                    placeholder="Password"
                     secureTextEntry={true}
                     onChangeText={(password) => this.setState({ password })}
                 />
 
-                <Button 
+                <Pressable 
+                    className="
+                        bg-blue-200
+                        text-center
+                        items-center
+                        mt-[50px]
+                        p-5
+                        rounded-lg
+                    "
                     onPress={() => this.onSignIn()}
-                    title="Sign In"
-                />
+                >
+                    <Text>{"Log In"}</Text>
+                </Pressable>
             </View>
         )
     }
