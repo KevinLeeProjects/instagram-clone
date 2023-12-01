@@ -71,8 +71,6 @@ function Profile(props) {
       console.error("Error fetching posts:", error);
     });
   }
-    
-    console.log(currentUser);
   }, [props.route.params.uid]);
 
   if(user == null)
@@ -81,44 +79,46 @@ function Profile(props) {
   }
 
   return (
-    <SafeAreaView className="w-[100vw] h-[100dvh] flex-1 flex flex-col">
-        <Text className="text-2xl font-bold">{user.name}</Text>
-        <View className="flex flex-col ">
-          {/* PFP and followers count */}
-          <View className="flex flex-row mr-[5px]">
-            <Text className="w-[25vw]">{"PFP"}</Text>
-            <View className="flex-1 flex-row justify-between">
-              <View className="flex flex-col items-center">
-                <Text>{postCount}</Text>
-                <Text>{"Posts"}</Text>
-              </View>
-              <View className="flex flex-col items-center">
-                <Text>{"0"}</Text>
-                <Text>{"Followers"}</Text>
-              </View>
-              <View className="flex flex-col items-center">
-                <Text>{"0"}</Text>
-                <Text>{"Following"}</Text>
+    <SafeAreaView className="h-[100dvh] flex-1 flex flex-col items-center mt-[10px]">
+        <View className="w-[92vw]">
+          <Text className="text-2xl font-bold">{user.name}</Text>
+          <View className="flex flex-col ">
+            {/* PFP and followers count */}
+            <View className="flex flex-row mr-[5px]">
+              <Text className="w-[25vw]">{"PFP"}</Text>
+              <View className="flex-1 flex-row justify-between">
+                <View className="flex flex-col items-center">
+                  <Text>{postCount}</Text>
+                  <Text>{"Posts"}</Text>
+                </View>
+                <View className="flex flex-col items-center">
+                  <Text>{"0"}</Text>
+                  <Text>{"Followers"}</Text>
+                </View>
+                <View className="flex flex-col items-center">
+                  <Text>{"0"}</Text>
+                  <Text>{"Following"}</Text>
+                </View>
               </View>
             </View>
-          </View>
 
-          {/* Name and Bio */}
-          <View className="flex flex-col mt-[10px]">
-            <Text>{"Name"}</Text>
-            <Text>{"Bio"}</Text>
-            <Text>{"Website"}</Text>
+            {/* Name and Bio */}
+            <View className="flex flex-col mt-[10px]">
+              <Text>{"Name"}</Text>
+              <Text>{"Bio"}</Text>
+              <Text>{"Website"}</Text>
+            </View>
           </View>
         </View>
         <View>
           <FlatList 
-            className="w-[100vw]"
+            className="w-[100vw] mt-[10px]"
             numColumns={3}
             horizontal={false}
             data={userPosts}
             renderItem={({item}) => (
               <Pressable
-                className="flex-1 aspect-square max-w-[33vw]"
+                className="flex-1 aspect-square max-w-[33.33vw]"
                 onPress={() => console.log("click")}
               >
                 <Image className="flex-1"
