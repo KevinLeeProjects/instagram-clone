@@ -33,7 +33,8 @@ export class Login extends Component {
                         p-2
                         mb-[10px]
                         rounded-lg
-                        text-lg
+                        text-2xl
+                        justify-center
                     "
                     placeholder="Email"
                     onChangeText={(email) => this.setState({ email })}
@@ -42,8 +43,9 @@ export class Login extends Component {
                     className="
                         border
                         p-2
-                        text-lg
+                        text-2xl
                         rounded-lg
+                        justify-center
                     "
                     placeholder="Password"
                     secureTextEntry={true}

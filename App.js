@@ -2,7 +2,6 @@ import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react'
 import { Text, View } from 'react-native';
 
-import firebase from "firebase/compat/app";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
@@ -51,6 +50,7 @@ import Save from './components/main/Save';
 
 
 const Stack = createStackNavigator();
+
 
 export class App extends Component {
   constructor(props) {
