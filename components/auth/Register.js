@@ -55,7 +55,6 @@ export class Register extends Component {
                             p-2
                             mb-[10px]
                             rounded-lg
-                            text-lg
                             justify-center
                             text-2xl
                         "
@@ -68,7 +67,6 @@ export class Register extends Component {
                             p-2
                             mb-[10px]
                             rounded-lg
-                            text-lg
                             justify-center
                             text-2xl
                         "

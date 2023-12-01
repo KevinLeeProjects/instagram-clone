@@ -3,7 +3,7 @@ import { View, TextInput, Image, Button } from 'react-native';
 
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { getAuth } from 'firebase/auth';
-import { collection, addDoc, getFirestore, serverTimestamp, doc  } from 'firebase/firestore';
+import { collection, addDoc, getFirestore, serverTimestamp } from 'firebase/firestore';
 require("firebase/firestore");
 require("firebase/storage");
 
@@ -20,14 +20,14 @@ export default function Save(props, {navigation}) {
 
         const storageRef = ref(storage, childPath);
         const task = uploadBytes(storageRef, blob).then((snapshot) => {
-            console.log(`Uploaded blob: ${JSON.stringify(snapshot)}`);
+            //console.log(`Uploaded blob: ${JSON.stringify(snapshot)}`);
             taskComplete();
         });
 
         const taskComplete = () => {
             getDownloadURL(storageRef).then((downloadURL) => {
                 savePostData(downloadURL);
-                console.log(`File available at ${downloadURL}`)
+                //console.log(`File available at ${downloadURL}`)
             })
         };
 

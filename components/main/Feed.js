@@ -1,11 +1,12 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function Feed() {
   return (
-    <View className="
+    <SafeAreaView className="
     ">
         <Text>{"Feed"}</Text>
-    </View>
+    </SafeAreaView>
   );
 };
