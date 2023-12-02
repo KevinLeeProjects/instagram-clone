@@ -1,5 +1,5 @@
 import { getAuth } from "firebase/auth";
-import { USER_STATE_CHANGE, USER_POSTS_STATE_CHANGE } from "../constants";
+import { USER_STATE_CHANGE, USER_POSTS_STATE_CHANGE, USER_FOLLOWING_STATE_CHANGE } from "../constants";
 
 import { collection, getDoc, getDocs, getFirestore, doc } from "firebase/firestore";
 
@@ -45,5 +45,24 @@ export function fetchUserPosts() {
         // Sort posts by creation date in descending order (most recent first)
         const sortedPosts = posts.sort((a, b) => b.creation - a.creation);
         dispatch({ type: USER_POSTS_STATE_CHANGE, posts: sortedPosts });
+    };
+}
+
+export function fetchUserFollowing() {
+    const db = getFirestore();
+    return async (dispatch) => {
+        const auth = getAuth();
+        const querySnapshot = await getDocs(collection(db, "following", auth.currentUser.uid, "userFollowing"));
+        const following = querySnapshot.docs.map((doc) => {
+            if (doc.exists()) {
+                const id = doc.id;
+                return id;
+            } else {
+                console.log('does not exist');
+                return null;
+            }
+        });
+
+        dispatch({ type: USER_FOLLOWING_STATE_CHANGE, following });
     };
 }
