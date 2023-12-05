@@ -13,32 +13,37 @@ function Feed(props) {
   
   useEffect(() => {
     let postsUsers = [];
-    if (props.usersLoaded === props.following.length) {
-      for (const element of props.following) {
-        const user = props.users.find((user) => user.uid === element);
-        
-        if (user !== undefined) {
-          
-          for (const [key, post] of Object.entries(user)) 
-          {
-            const keyInt = parseInt(key);
-            if (!isNaN(keyInt))
+    if(props.following != undefined)
+    {
+      if (props.usersLoaded === props.following.length) {
+        for (const element of props.following) {
+          const user = props.users.find((user) => user.uid === element);
+          // console.log(`props: ${JSON.stringify(props)}`);
+          // console.log(`user ${user} ${JSON.stringify(user)}`);
+          if (user !== undefined) {
+            
+            for (const [key, post] of Object.entries(user)) 
             {
-              postsUsers = [...postsUsers, { id: keyInt, data: post }];
+              const keyInt = parseInt(key);
+              if (!isNaN(keyInt))
+              {
+                postsUsers = [...postsUsers, { id: keyInt, data: post }];
+              }
             }
+            
+            
           }
-          
-          
         }
+        postsUsers.sort(function (x, y) {
+          return x.creation - y.creation;
+        });
+  
+        setPosts(postsUsers);
+  
+        console.log(`posts ${JSON.stringify(posts)}`);
       }
-      postsUsers.sort(function (x, y) {
-        return x.creation - y.creation;
-      });
-
-      setPosts(postsUsers);
-
-      console.log(`posts ${JSON.stringify(posts)}`);
     }
+
   }, [props.usersLoaded, props.users, props.following]);
 
   if (props.usersLoaded !== props.following.length) {
@@ -49,20 +54,20 @@ function Feed(props) {
   return (
     <SafeAreaView className="h-[100dvh] flex-1 flex flex-col items-center">
     <ScrollView>
-      <View>
+    <View>
         {posts.map((postDetails) => (
           <View className="flex-1 mt-[50px]" key={postDetails.id}>
-            <Text className="ml-3">{postDetails.data.user.name}</Text>
+            <Text className="ml-3">{postDetails?.data?.user?.name ?? null}</Text>
             <Pressable
               className="flex-1 w-[100vw] h-[100vw] mt-[10px]"
-              onPress={() => console.log(`click: ${postDetails.data.downloadURL}`)}
+              onPress={() => console.log(`click: ${postDetails?.data?.downloadURL}`)}
             >
-              <Image className="flex-1" source={{ uri: postDetails.data.downloadURL }} />
+              <Image className="flex-1" source={{ uri: postDetails?.data?.downloadURL ?? '' }} />
               {/* <Text className="flex-1 bg-gray-100">{JSON.stringify(postDetails)}</Text> */}
             </Pressable>
             <View className="flex-1 flex-row mt-2 ml-3">
-              <Text className="">{postDetails.data.user.name}</Text>
-              <Text className="ml-2">{postDetails.data.caption}</Text>
+              <Text className="">{postDetails?.data?.user?.name ?? null}</Text>
+              <Text className="ml-2">{postDetails?.data?.caption ?? null}</Text>
             </View>
           </View>
         ))}

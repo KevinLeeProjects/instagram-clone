@@ -14,9 +14,11 @@ function Profile(props) {
   const [following, setFollowing] = useState(false);
 
   const db = getFirestore();
+
+  const { currentUser, posts } = props;
   
   useEffect(() => {
-    const { currentUser, posts } = props;
+    
     setPostCount(posts.length);
 
     if(props.route.params.uid == getAuth().currentUser.uid)
@@ -107,6 +109,10 @@ function Profile(props) {
     }
   };
 
+  const onLogout = () => {
+    getAuth().signOut();
+  }
+
   if(user == null)
   {
     return <View><Text>{"Loading"}</Text></View>
@@ -136,12 +142,7 @@ function Profile(props) {
               </View>
             </View>
 
-            {/* Name and Bio */}
-            <View className="flex flex-col mt-[10px]">
-              <Text>{"Name"}</Text>
-              <Text>{"Bio"}</Text>
-              <Text>{"Website"}</Text>
-            </View>
+            
             
               {props.route.params.uid !== getAuth().currentUser.uid ? (
                 <View >
@@ -162,7 +163,12 @@ function Profile(props) {
                     )}
                 </View>
               ) : (
-                null
+                <Pressable
+                  onPress={() => onLogout()}  
+                  className="items-center bg-blue-500 rounded-lg justify-center p-3 mt-[20px]"
+                >
+                  <Text className="text-white">{"Logout"}</Text>
+                </Pressable>
               )}
             
           </View>
