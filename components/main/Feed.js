@@ -51,7 +51,7 @@ function Feed(props) {
     <ScrollView>
       <View>
         {posts.map((postDetails) => (
-          <View className="flex-1 mt-[50px]">
+          <View className="flex-1 mt-[50px]" key={postDetails.id}>
             <Text className="ml-3">{postDetails.data.user.name}</Text>
             <Pressable
               className="flex-1 w-[100vw] h-[100vw] mt-[10px]"
